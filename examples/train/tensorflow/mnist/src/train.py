@@ -1,5 +1,6 @@
 import tensorflow as tf
 import mlflow.tensorflow
+from azureml.core import Workspace, Run
 
 mlflow.tensorflow.autolog()
 
@@ -29,7 +30,11 @@ model.compile(optimizer="adam", loss=loss_fn, metrics=["accuracy"])
 model.fit(x_train, y_train, epochs=5)
 model.evaluate(x_test, y_test, verbose=2)
 
+# save the model
+model.save('/modeloutput')
+
 # register the model
-model.save('/model')
+run = Run.get_context()
+run.register_model('mnist-dabrady', '/modeloutput')
 
 # todo: fire off a repository_dispatch event
