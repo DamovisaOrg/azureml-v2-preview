@@ -31,10 +31,11 @@ model.fit(x_train, y_train, epochs=5)
 model.evaluate(x_test, y_test, verbose=2)
 
 # save the model
-model.save('mnist-dabrady')
+model.save('mnist-dabrady.h5')
 
 # register the model
 run = Run.get_context()
-run.register_model(model_name='mnist-dabrady')
+run.upload_file('mnist-dabrady.h5')
+run.register_model(model_name='mnist-dabrady', model_path='mnist-dabrady.h5')
 
 # todo: fire off a repository_dispatch event
