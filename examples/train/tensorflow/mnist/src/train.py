@@ -30,6 +30,6 @@ model.fit(x_train, y_train, epochs=5)
 model.evaluate(x_test, y_test, verbose=2)
 
 # register the model
-mlflow.tensorflow.log_model(model, 'model')
+model.save('/model')
 
 # todo: fire off a repository_dispatch event
