@@ -35,7 +35,7 @@ model.save('mnist-dabrady.h5')
 
 # register the model
 run = Run.get_context()
-run.upload_file('mnist-dabrady.h5')
+run.upload_file('mnist-dabrady', 'mnist-dabrady.h5')
 run.register_model(model_name='mnist-dabrady', model_path='mnist-dabrady.h5')
 
 # todo: fire off a repository_dispatch event
