@@ -34,11 +34,12 @@ model.evaluate(x_test, y_test, verbose=2)
 run = Run.get_context()
 
 # save the model
-print("model saved to outputs")
 model.save('outputs')
+print("model saved to outputs")
 
 # register the model
 run.upload_folder('mnist-dabrady', 'outputs')
-run.register_model(model_name='mnist-dabrady-model', model_path='mnist-dabrady')
+saved_model = run.register_model(model_name='mnist-dabrady-model', model_path='mnist-dabrady')
+print(f'Model {saved_model.name}:{saved_model.version} registered with AML: {saved_model.url}')
 
 # todo: fire off a repository_dispatch event
