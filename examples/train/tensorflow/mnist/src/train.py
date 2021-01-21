@@ -39,6 +39,6 @@ model.save('outputs')
 
 # register the model
 run.upload_folder('mnist-dabrady', 'outputs')
-run.register_model(model_name='mnist-dabrady-model', model_path='mnist-dabrady', tags='model')
+run.register_model(model_name='mnist-dabrady-model', model_path='mnist-dabrady')
 
 # todo: fire off a repository_dispatch event
