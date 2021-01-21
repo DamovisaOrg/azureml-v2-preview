@@ -30,12 +30,15 @@ model.compile(optimizer="adam", loss=loss_fn, metrics=["accuracy"])
 model.fit(x_train, y_train, epochs=5)
 model.evaluate(x_test, y_test, verbose=2)
 
+# get run context
+run = Run.get_context()
+
 # save the model
-model.save('mnist-dabrady.h5')
+print("model saved to outputs")
+model.save('outputs')
 
 # register the model
-run = Run.get_context()
-run.upload_file('mnist-dabrady', 'mnist-dabrady.h5')
-run.register_model(model_name='mnist-dabrady', model_path='mnist-dabrady.h5')
+run.upload_folder('mnist-dabrady', 'outputs')
+run.register_model(model_name='mnist-dabrady-model', model_path='mnist-dabrady', tags='model')
 
 # todo: fire off a repository_dispatch event
