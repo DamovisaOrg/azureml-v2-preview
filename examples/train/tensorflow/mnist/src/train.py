@@ -52,7 +52,7 @@ def main(repo_dispatch_key):
     post_headers = {'Authorization': f'Bearer {repo_dispatch_key}', 'Accept': 'application/vnd.github.v3+json'}
     request_data = {'event_type':'model_registered', 'client_payload': {'name': saved_model.name, 'version': saved_model.version, 'url': saved_model.url }}
     request = requests.Request('POST', 'https://api.github.com/repos/DamovisaOrg/azureml-v2-preview/dispatches', json=request_data, headers=post_headers)
-    prepped = session.prepare(request)
+    prepped = session.prepare_request(request)
     print(f'Request to {prepped.url}')
     print(f'Headers: {prepped.headers}')
     print(f'Data: {prepped.body}')
