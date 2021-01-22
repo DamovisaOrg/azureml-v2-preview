@@ -46,7 +46,8 @@ def main(repo_dispatch_key):
     print(f'Model {saved_model.name}:{saved_model.version} registered with AML: {saved_model.url}')
 
     # todo: fire off a repository_dispatch event
-    post_headers = {'Authorization': f'Bearer: {repo_dispatch_key}', 'Accept': 'application/vnd.github.v3+json'}
+    print(f'request to https://api.github.com/repos/DamovisaOrg/azureml-v2-preview/dispatches')
+    post_headers = {'Authorization': f'Bearer {repo_dispatch_key}', 'Accept': 'application/vnd.github.v3+json'}
     github_dispatch = requests.post('https://api.github.com/repos/DamovisaOrg/azureml-v2-preview/dispatches', data={'event_type':'model_registered', 'client_payload': {'name': saved_model.name, 'version': saved_model.version, 'url': saved_model.url }}, headers=post_headers) 
     print(github_dispatch)
 
