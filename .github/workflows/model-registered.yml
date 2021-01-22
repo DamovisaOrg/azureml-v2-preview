@@ -1,0 +1,15 @@
+name: Model Registered callback
+
+on:
+  repository_dispatch:
+    types: [model_registered]
+
+jobs:
+  output:
+    runs-on: ubuntu-latest
+
+    steps:
+      - run: |
+          echo "A model was registered:"
+          echo "${{ github.event.client_payload.name }}:${{ github.event.client_payload.version }}"
+          echo "You can find it at: ${{ github.event.client_payload.url }}"
