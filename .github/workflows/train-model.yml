@@ -21,7 +21,7 @@ jobs:
     - name: azure login
       uses: azure/login@v1
       with:
-        creds: ${{secrets.AZURE_TOKEN_DABRADY}}
+        creds: ${{secrets.AZURE_TOKEN}}
     - name: set az defaults
       run: |
           az config set defaults.workspace=dabrady-aml-workspace
