@@ -17,16 +17,16 @@ jobs:
       with:
         python-version: 3.7
     - run: |
-        az extension add --source https://azuremlsdktestpypi.blob.core.windows.net/wheels/sdk-cli-v2/ml-0.0.15-py3-none-any.whl --pip-extra-index-urls https://azuremlsdktestpypi.azureedge.net/sdk-cli-v2 -y
+        az extension add --source https://azuremlsdktestpypi.blob.core.windows.net/wheels/sdk-cli-v2/ml-0.0.21-py3-none-any.whl --pip-extra-index-urls https://azuremlsdktestpypi.azureedge.net/sdk-cli-v2 -y
     - name: azure login
       uses: azure/login@v1
       with:
-        creds: ${{secrets.AZURE_TOKEN}}
+        creds: ${{secrets.AZURE_TOKEN_DABRADY}}
     - name: set az defaults
       run: |
-          az config set defaults.workspace=e2edemos
-          az config set defaults.group=demorg
-          az account set -s 92c76a2f-0e1c-4216-b65e-abf7a3f34c1e
+          az config set defaults.workspace=dabrady-aml-workspace
+          az config set defaults.group=aml-rg
+          az account set -s bc202ec2-54ef-4576-b7fb-a961c983398e
     - name: Create an environment
       run: |
           az ml environment create --file examples/train/tensorflow/mnist/tf_env.yml

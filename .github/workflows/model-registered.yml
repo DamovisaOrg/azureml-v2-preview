@@ -13,3 +13,25 @@ jobs:
           echo "A model was registered:"
           echo "${{ github.event.client_payload.name }}:${{ github.event.client_payload.version }}"
           echo "You can find it at: ${{ github.event.client_payload.url }}"
+      - name: Checkout
+        uses: actions/checkout@v2.3.3
+      - name: Setup Python
+        uses: actions/setup-python@v2.1.4
+        with:
+          python-version: 3.7
+      - run: |
+          az extension add --source https://azuremlsdktestpypi.blob.core.windows.net/wheels/sdk-cli-v2/ml-0.0.21-py3-none-any.whl --pip-extra-index-urls https://azuremlsdktestpypi.azureedge.net/sdk-cli-v2 -y
+      - name: azure login
+        uses: azure/login@v1
+        with:
+          creds: ${{secrets.AZURE_TOKEN_DABRADY}}
+      - name: set az defaults
+        run: |
+          az config set defaults.workspace=dabrady-aml-workspace
+          az config set defaults.group=aml-rg
+          az account set -s bc202ec2-54ef-4576-b7fb-a961c983398e
+
+      - name: Pull model down (so we can get code)      
+        run: az ml model 
+      - name: Deploy model
+        run: az ml endpoint create --file examples/deploy/tensorflow/mnist_acs_endpoint.yml --set deployments.prod.model="azureml:${{ github.event.client_payload.name }}:${{github.event.client_payload.version }}"
