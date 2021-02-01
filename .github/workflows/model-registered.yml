@@ -40,5 +40,6 @@ jobs:
       #- name: Pull model down (so we can get correctly-versioned code)
       #  run: az ml model download ... TBD
 
+      # Trying without variables :(
       - name: Deploy model
-        run: az ml endpoint create --file examples/deploy/tensorflow/mnist_acs_endpoint.yml --set deployments.prod.model="azureml:${{ github.event.client_payload.name }}:${{github.event.client_payload.version }}"
+        run: az ml endpoint create --file examples/deploy/tensorflow/mnist_acs_endpoint.yml # --set deployments.prod.model="azureml:${{ github.event.client_payload.name }}:${{github.event.client_payload.version }}"

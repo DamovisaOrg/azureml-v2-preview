@@ -9,7 +9,7 @@ traffic:
 deployments:
   #prod deployment
   prod:    
-    model: azureml:modelname:modelversion  # will be replaced in pipeline
+    model: azureml:mnist-dabrady-model:3  # will be replaced in pipeline
     code_configuration:
       code: 
         directory: ./onlinescoring/
