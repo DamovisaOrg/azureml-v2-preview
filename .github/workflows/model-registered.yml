@@ -41,7 +41,7 @@ jobs:
       #  run: az ml model download ... TBD
 
       # create endpoint (if it doesn't exist) then deploy the model
-      - name: Create endpoint
-        run: az ml endpoint create --file examples/deploy/tensorflow/mnist_mir_endpoint_create.yml
+      #- name: Create endpoint
+      #  run: az ml endpoint create --file examples/deploy/tensorflow/mnist_mir_endpoint_create.yml
       - name: Deploy model
         run: az ml endpoint update --file examples/deploy/tensorflow/mnist_mir_endpoint.yml --set deployments.prod.model="azureml:${{ github.event.client_payload.name }}:${{ github.event.client_payload.version }}"
