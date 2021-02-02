@@ -9,9 +9,7 @@ traffic:
 deployments:
   #prod deployment
   prod:    
-    model:
-      name: azureml:mnist-dabrady-model
-      version: 3
+    model: azureml:mnist-dabrady-model:1  # should replace this in the pipeline
     code_configuration:
       code: 
         directory: ./onlinescoring/
